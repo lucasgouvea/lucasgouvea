@@ -4,14 +4,10 @@ import Navbar from "../shared/navbar/navbar";
 
 function MyApp({ Component, pageProps }) {
     return (
-        <>
-            <div>
-                <main>
-                    <Navbar />
-                    <Component {...pageProps} />
-                </main>
-            </div>
-        </>
+        <main>
+            <Navbar />
+            <Component {...pageProps} />
+        </main>
     );
 }
 

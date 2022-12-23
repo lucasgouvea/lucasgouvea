@@ -3,11 +3,15 @@ import styles from "./navbar.module.css"
 
 export default function Navbar() {
     return (
-        <ul className={styles.navbar}>
-            <li><Link href="/">me</Link></li>
-            <li><Link href="/blog">blog</Link></li>
-            <li><Link href="/contact">contact</Link></li>
-        </ul>
+        <div className={styles.navbar}>
+            <p className={styles.title}>
+                <Link href="/">lucas gouvea</Link>
+            </p>
+            <ul>
+                <li id="blog"><Link href="/blog">blog</Link></li>
+                <li id="contact"><Link href="/contact">contact</Link></li>
+            </ul>
+        </div>
     )
 }
 
