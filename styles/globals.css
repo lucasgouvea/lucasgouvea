@@ -10,14 +10,14 @@ body {
   box-sizing: border-box;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-
 h1,
 h2,
 p,
 ul {
   margin: 0;
+}
+
+img {
+  width: 8.02em;
+  height: 12em;
 }
