@@ -15,13 +15,7 @@ export default function Document() {
                 crossOrigin="anonymous"
             ></script> */}
 
-            <body style={{
-                backgroundImage: "url('background.jpeg');", backgroundPosition: 'center',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                width: "100%",
-                height: "100%",
-            }}>
+            <body>
                 <Main />
                 <NextScript />
             </body>

@@ -7,7 +7,7 @@ export default function Home() {
         <p>Strongly interested in architecting, developing, and maintaining systems based
           on the state of the art technologies. Besides that, I enjoy
           reading books on themes like psychology, philosophy, and
-          neuroscience. Cyberpunk enthusiast, lover of sci-fi series and
+          economics. Cyberpunk enthusiast, lover of sci-fi series and
           retrogaming.</p>
       </div>
     </div>

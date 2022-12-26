@@ -27,29 +27,20 @@
     position: relative;
 }
 
-.navbar li:hover {
-    margin-top: -0.18em;
-}
 
-.navbar li::after {
-    content: '';
-    position: absolute;
-    width: 100%;
-    transform: scaleX(0);
-    height: 0.1em;
-    bottom: 1.2em;
-    left: 0;
-    background-color: #FDFFF1;
-    transform-origin: bottom right;
-    transition: transform 0.25s ease-out;
-}
-
-.navbar li:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
 
 .title {
     line-height: 1.15;
     font-size: 1.25em;
+}
+
+.logo {
+    width: 14em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon {
+    margin-right: 0.25em;
 }
