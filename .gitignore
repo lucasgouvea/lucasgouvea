@@ -30,3 +30,5 @@ yarn-error.log*
 .env.production.local
 
 lucas-gouvea.tar.gz
+
+.env

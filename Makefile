@@ -1,16 +1,16 @@
 ssh:
-	ssh -i "C:\Users\lucas\LocalRepo\ssh-key.pem" ec2-user@ec2-54-91-239-252.compute-1.amazonaws.com
+	ssh -i "${KEY_PATH}" ec2-user@${EC2_HOST}
 build:
 	yarn build
 	tar -czvf lucas-gouvea.tar.gz .
 clear:
-	ssh -i "C:\Users\lucas\LocalRepo\ssh-key.pem" ec2-user@ec2-54-91-239-252.compute-1.amazonaws.com \
+	ssh -i "${KEY_PATH}" ec2-user@${EC2_HOST} \
 		'\
 			rm -rf lucas-gouvea;\
 			mkdir lucas-gouvea;\
 		'
 untar:
-	ssh -i "C:\Users\lucas\LocalRepo\ssh-key.pem" ec2-user@ec2-54-91-239-252.compute-1.amazonaws.com \
+	ssh -i "${KEY_PATH}" ec2-user@${EC2_HOST} \
 		'\
 			cd lucas-gouvea;\
 			tar -xvf lucas-gouvea.tar.gz;\
@@ -19,13 +19,13 @@ untar:
 		'
 		
 forward_ports:
-	ssh -i "C:\Users\lucas\LocalRepo\ssh-key.pem" ec2-user@ec2-54-91-239-252.compute-1.amazonaws.com \
+	ssh -i "${KEY_PATH}" ec2-user@${EC2_HOST} \
 	'\
 		sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 3000;\
 		sudo iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 3000;\
 	'
 restart_pm2:
-	ssh -i "C:\Users\lucas\LocalRepo\ssh-key.pem" ec2-user@ec2-54-91-239-252.compute-1.amazonaws.com \
+	ssh -i "${KEY_PATH}" ec2-user@${EC2_HOST} \
 		'\
 			cd lucas-gouvea;\
 			pm2 del 0;\
@@ -35,7 +35,7 @@ restart_pm2:
 			echo !! Finished !!;\
 		'
 scp:
-	scp -v -i "C:\Users\lucas\LocalRepo\ssh-key.pem" -r lucas-gouvea.tar.gz ec2-user@ec2-54-91-239-252.compute-1.amazonaws.com:/home/ec2-user/lucas-gouvea
+	scp -v -i "${KEY_PATH}" -r lucas-gouvea.tar.gz ec2-user@${EC2_HOST}:/home/ec2-user/lucas-gouvea
 deploy:
 	make build
 	make clear
