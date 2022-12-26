@@ -15,7 +15,13 @@ export default function Navbar() {
     return (
         <div className={styles.navbar}>
             <div className={styles.logo}>
-                {selected === 'lucas' && <FaChevronRight className={styles.icon} color="#FDFFF1" size="12" />}
+                <FaChevronRight
+                    className={styles.icon}
+                    color="#FDFFF1"
+                    size="12"
+
+                    style={{ visibility: selected === 'lucas' ? 'visible' : 'hidden' }}
+                />
                 <p
                     className={styles.title}
                     onClick={() => setSelected('lucas')}
