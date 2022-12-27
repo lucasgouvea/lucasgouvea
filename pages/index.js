@@ -31,12 +31,10 @@ export default function Home() {
 
         </div>
         <div className={styles.content}>
-          <p className={styles.me}>Me</p>
+          <p className={styles.me}>About me</p>
           <p>{welcomeText}</p>
         </div>
       </div>
-
-
     </div>
   )
 }

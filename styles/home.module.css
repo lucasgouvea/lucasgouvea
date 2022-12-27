@@ -28,7 +28,7 @@
 
 .card p {
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.5;
   padding: 0.4em 1.4em;
 }
@@ -46,7 +46,7 @@
 
 .me {
   font-weight: bold;
-  font-size: 16px !important;
+  font-size: 18px !important;
 }
 
 @media (max-width: 600px) {

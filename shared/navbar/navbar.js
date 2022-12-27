@@ -40,14 +40,14 @@ export default function Navbar() {
                         blog
                     </Link>
                 </li>
-                <li id="contact"
+                {/*                 <li id="contact"
                     style={selected === 'contact' ? selectedStyle : {}}
                     onClick={() => setSelected('contact')}
                 >
                     <Link href="/contact">
                         contact
                     </Link>
-                </li>
+                </li> */}
             </ul>
         </div>
     )
