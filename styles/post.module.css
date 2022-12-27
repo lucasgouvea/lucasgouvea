@@ -1,14 +1,41 @@
+.container {
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .post {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    width: 50%;
 }
 
 .text {
-    width: 50%;
+    margin-top: 2em;
 }
 
 .text p {
     margin-bottom: 1.2em;
+    line-height: 1.8em;
+}
+
+.title {
+    font-size: 1.8em;
+    padding: 0.8em;
+    text-align: center;
+}
+
+.date {
+    font-size: 1em;
+    font-weight: 100;
+}
+
+.keywords {
+    color: #1c1a36;
+    padding: 1em;
+    margin-bottom: 1em;
 }
