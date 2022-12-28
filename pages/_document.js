@@ -1,4 +1,6 @@
 import { Html, Head, Main, NextScript } from "next/document";
+import Script from 'next/script'
+
 
 export default function Document() {
     return (
@@ -8,6 +10,17 @@ export default function Document() {
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
                 <link href="https://fonts.googleapis.com/css2?family=Lustria&display=swap" rel="stylesheet" />
                 <link rel="icon" href="/favicon.ico" />
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-4JFVNZKGH2"></script>
+                <Script id="google-analytics" strategy="afterInteractive">
+                    {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', 'G-4JFVNZKGH2');
+                     `}
+                </Script>
+
             </Head>
             {/*             <script
                 async
