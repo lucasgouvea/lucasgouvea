@@ -17,7 +17,6 @@ untar:
 			cd ..;\
 			sudo chmod 777 lucas-gouvea -R;\
 		'
-		
 forward_ports:
 	ssh -i "${KEY_PATH}" ec2-user@${EC2_HOST} \
 	'\
@@ -43,3 +42,9 @@ deploy:
 	make untar
 	make forward_ports
 	make restart_pm2
+run:
+	go run lucasgouvea-backend
+migrations-up:
+	go run lucasgouvea-backend migrations:up
+migrations-down:
+	go run lucasgouvea-backend migrations:down
