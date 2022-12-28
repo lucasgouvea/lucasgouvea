@@ -10,7 +10,11 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-func GetDB() *gorm.DB {
+var db *gorm.DB
+
+func Start() {
+	var err error
+
 	newLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
 		logger.Config{
@@ -21,7 +25,7 @@ func GetDB() *gorm.DB {
 		},
 	)
 
-	db, err := gorm.Open(postgres.New(postgres.Config{
+	db, err = gorm.Open(postgres.New(postgres.Config{
 		DSN:                  "host=localhost user=root password=pg_password dbname=pg_database port=5432 sslmode=disable",
 		PreferSimpleProtocol: true,
 	}), &gorm.Config{
@@ -31,13 +35,14 @@ func GetDB() *gorm.DB {
 	if err != nil {
 		panic(err)
 	}
+}
 
+func GetDB() *gorm.DB {
 	return db
 }
 
 func Migrate(models []any) {
 	db := GetDB()
-
 	for _, model := range models {
 		db.AutoMigrate(model)
 	}

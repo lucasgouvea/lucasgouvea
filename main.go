@@ -19,6 +19,8 @@ func main() {
 	args := os.Args
 	fmt.Printf("args: %v\n", args)
 
+	Database.Start()
+
 	if len(args) > 1 && args[1] == "migrations:up" {
 		models := []any{&Posts.Keyword{}, &Posts.Post{}}
 		Database.Migrate(models)

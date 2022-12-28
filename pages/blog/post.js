@@ -13,8 +13,10 @@ export default function Post({ posts }) {
     return (
         <div className={styles.container}>
             <div className={styles.post}>
-                <h3 className={styles.title}>{posts[0].title}</h3>
-                <h4 className={styles.date}>{format(new Date(posts[0].created_at), 'dd/MM/yyyy - HH:mm')} h</h4>
+                <div className={styles.header}>
+                    <h3 className={styles.title}>{posts[0].title}</h3>
+                    <h4 className={styles.date}>{format(new Date(posts[0].created_at), 'dd/MM/yyyy - HH:mm')} h</h4>
+                </div>
                 <div className={styles.text}>
                     <div dangerouslySetInnerHTML={{ __html: posts[0].text }} />
                 </div>
