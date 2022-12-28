@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 
 	Posts "lucasgouvea-backend/internal/api/posts"
 
@@ -12,18 +14,26 @@ import (
 )
 
 func main() {
-
 	err := godotenv.Load()
+
+	args := os.Args
+	fmt.Printf("args: %v\n", args)
+
+	if len(args) > 1 && args[1] == "migrations:up" {
+		models := []any{&Posts.Keyword{}, &Posts.Post{}}
+		Database.Migrate(models)
+		return
+	}
+
+	if len(args) > 1 && args[1] == "migrations:down" {
+		tables := []string{"keywords", "posts", "post_keywords"}
+		Database.Drop(tables)
+		return
+	}
 
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-
-	tables := []string{"keywords", "posts", "post_keywords"}
-	models := []any{&Posts.Keyword{}, &Posts.Post{}}
-
-	Database.Drop(tables)
-	Database.Migrate(models)
 
 	router := gin.Default()
 
