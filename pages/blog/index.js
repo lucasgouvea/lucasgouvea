@@ -3,7 +3,19 @@ import Link from "next/link"
 import { format } from "date-fns"
 
 export async function getStaticProps(context) {
-    let res = await fetch('http://localhost:8080/v1/posts')
+    let res
+
+    switch (context.locale) {
+        case 'en-US':
+            res = await fetch('http://localhost:8080/v1/posts', { headers: { "Accept-Language": "en_US" } })
+            break
+        case 'pt-BR':
+            res = await fetch('http://localhost:8080/v1/posts', { headers: { "Accept-Language": "pt_BR" } })
+            break
+        default:
+            res = await fetch('http://localhost:8080/v1/posts', { headers: { "Accept-Language": "en_US" } })
+    }
+
     res = await res.json()
     return {
         props: { posts: res.data },

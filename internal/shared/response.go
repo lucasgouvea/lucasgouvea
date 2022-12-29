@@ -22,8 +22,8 @@ func (response Response[T]) Send(context *gin.Context, status int) {
 	}
 }
 
-func NewResponse[T any](schemas []T) IResponse[T] {
+func NewResponse[T any](models []T) IResponse[T] {
 	response := new(Response[T])
-	response.Data = schemas
+	response.Data = models
 	return *response
 }

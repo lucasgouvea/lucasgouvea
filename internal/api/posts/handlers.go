@@ -10,43 +10,35 @@ import (
 )
 
 func GetPosts(context *gin.Context) {
-	var schemas = []PostSchema{}
+	var posts = []PostSchema{}
+	var models = []Post{}
 	db := Database.GetDB()
-	posts, err := FindPosts(db)
+	models, err := FindPosts(db)
 
 	if err != nil {
 		panic(err)
 	}
 
-	for _, post := range posts {
-		schemas = append(schemas, NewPostSchema(post))
+	for _, model := range models {
+		posts = append(posts, NewPostSchema(model, Shared.GetLanguage(context)))
 	}
 
-	response := Shared.NewResponse(schemas)
+	response := Shared.NewResponse(posts)
 	response.Send(context, 200)
 }
 
 func PostPost(context *gin.Context) {
-	var schemas = []PostCreateSchema{}
-	var postCreateSchema PostCreateSchema
-	var model *Post
-	var keywords []Keyword
+	var post = Post{}
 	db := Database.GetDB()
 
-	if err := context.ShouldBindWith(&postCreateSchema, binding.JSON); err != nil {
+	if err := context.ShouldBindWith(&post, binding.JSON); err != nil {
 		panic(err)
 	}
 
-	for _, keyword := range postCreateSchema.Keywords {
-		keywords = append(keywords, Keyword{Description: keyword})
-	}
-
-	model = NewPost(postCreateSchema)
-	if err := CreatePost(db, *model, keywords); err != nil {
+	if err := CreatePost(db, post); err != nil {
 		panic(err)
 	}
 
-	schemas = append(schemas, postCreateSchema)
-	response := Shared.NewResponse(schemas)
+	response := Shared.NewResponse([]Post{post})
 	response.Send(context, 200)
 }

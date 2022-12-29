@@ -13,9 +13,12 @@
     text-decoration: none;
 }
 
-.navbar ul {
-    list-style-type: none;
+.right_nav {
     display: flex;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    width: 12em;
 }
 
 .navbar li {
@@ -43,4 +46,42 @@
 
 .icon {
     margin-right: 0.25em;
+}
+
+.icon_arrow {
+    margin-bottom: 0.16em;
+}
+
+.i18n {
+    height: 100%;
+    width: 5em;
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+    margin-top: 1.5em;
+    cursor: pointer;
+}
+
+
+.i18n:hover .i18n_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.i18n_content {
+    display: none;
+    position: absolute;
+    background-color: #FDFFF1;
+    border: 1px solid #eaeaea;
+    width: 3.2em;
+    z-index: 1;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    padding-right: 0.68em;
+    margin-top: 0.4em;
+}
+
+.i18n_content:hover {
+    background-color: #1c1a36;
+    border: 1px solid #1c1a36;
 }
