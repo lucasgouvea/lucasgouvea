@@ -22,13 +22,14 @@ func main() {
 	Database.Start()
 
 	if len(args) > 1 && args[1] == "migrations:up" {
-		models := []any{&Posts.Keyword{}, &Posts.Post{}}
+		models := []any{&Posts.Keyword{}, &Posts.Post{}, &Posts.LucasGouvea{}}
 		Database.Migrate(models)
+		Posts.Seed()
 		return
 	}
 
 	if len(args) > 1 && args[1] == "migrations:down" {
-		tables := []string{"keywords", "posts", "post_keywords"}
+		tables := []string{"keywords", "posts", "post_keywords", "lucas_gouvea"}
 		Database.Drop(tables)
 		return
 	}

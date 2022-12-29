@@ -2,17 +2,29 @@ import styles from '../styles/home.module.css';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Link from "next/link"
 
-const startedYear = 2018
+export async function getStaticProps(context) {
+  let res
 
-function getWelcomeText() {
-  const currentYear = new Date().getFullYear()
-  const inTheIndustryYears = currentYear - startedYear
-  const welcomeText = `Hello there, my name is Lucas Gouvea, and I'm a Software Engineer. I've been working in the industry for ${inTheIndustryYears} years. Besides technology, I enjoy reading books on themes like self-development, philosophy, and economics.`
-  return welcomeText
+  switch (context.locale) {
+    case 'en-US':
+      res = await fetch('http://localhost:8080/v1/lucasgouvea', { headers: { "Accept-Language": "en_US" } })
+      break
+    case 'pt-BR':
+      res = await fetch('http://localhost:8080/v1/lucasgouvea', { headers: { "Accept-Language": "pt_BR" } })
+      break
+    default:
+      res = await fetch('http://localhost:8080/v1/lucasgouvea', { headers: { "Accept-Language": "en_US" } })
+  }
+
+  res = await res.json()
+  return {
+    props: { lucasgouvea: res.data[0] },
+  }
 }
-export default function Home() {
 
-  const welcomeText = getWelcomeText()
+export default function Home({ lucasgouvea }) {
+
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '6%', flexDirection: 'column' }}>
       <div className={styles.card}>
@@ -32,7 +44,7 @@ export default function Home() {
         </div>
         <div className={styles.content}>
           <p className={styles.me}>About me</p>
-          <p>{welcomeText}</p>
+          <p>{lucasgouvea.description}</p>
         </div>
       </div>
     </div>

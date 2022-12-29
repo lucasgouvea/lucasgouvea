@@ -9,6 +9,10 @@ type PostSchema struct {
 	Keywords  []string  `json:"keywords"`
 }
 
+type LucasGouveaSchema struct {
+	Description string `json:"description"`
+}
+
 const (
 	pt_BR string = "pt_BR"
 	en_US        = "en_US"
@@ -43,5 +47,20 @@ func NewPostSchema(model Post, language string) PostSchema {
 	}
 
 	panic("Unsupported language")
+}
 
+func NewLucasGouveaSchema(model LucasGouvea, language string) LucasGouveaSchema {
+	schema := new(LucasGouveaSchema)
+
+	if language == en_US {
+		schema.Description = model.Description_en_us
+		return *schema
+	}
+
+	if language == pt_BR {
+		schema.Description = model.Description_pt_br
+		return *schema
+	}
+
+	panic("Unsupported language")
 }

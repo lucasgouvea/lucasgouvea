@@ -46,7 +46,6 @@ func Migrate(models []any) {
 	for _, model := range models {
 		db.AutoMigrate(model)
 	}
-
 }
 
 func Drop(tables []string) {

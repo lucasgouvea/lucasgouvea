@@ -42,3 +42,18 @@ func PostPost(context *gin.Context) {
 	response := Shared.NewResponse([]Post{post})
 	response.Send(context, 200)
 }
+
+func GetLucasGouvea(context *gin.Context) {
+	db := Database.GetDB()
+
+	model, err := FindLucasGouvea(db)
+
+	schema := NewLucasGouveaSchema(model, Shared.GetLanguage(context))
+
+	if err != nil {
+		panic(err)
+	}
+
+	response := Shared.NewResponse([]LucasGouveaSchema{schema})
+	response.Send(context, 200)
+}

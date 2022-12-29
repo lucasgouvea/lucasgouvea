@@ -39,3 +39,10 @@ func CreatePost(db *gorm.DB, post Post) error {
 
 	return err
 }
+
+func FindLucasGouvea(db *gorm.DB) (LucasGouvea, error) {
+	var lucasgouvea LucasGouvea
+	err := db.Find(&lucasgouvea).Error
+
+	return lucasgouvea, err
+}
