@@ -35,6 +35,8 @@ restart_pm2:
 		'
 scp:
 	scp -v -i "${KEY_PATH}" -r lucas-gouvea.tar.gz ec2-user@${EC2_HOST}:/home/ec2-user/lucas-gouvea
+scp-backend:
+	scp -v -i "${KEY_PATH}" -r lucasgouvea-backend ec2-user@${EC2_HOST}:/home/ec2-user/lucas-gouvea
 deploy:
 	make build
 	make clear
@@ -48,3 +50,9 @@ migrations-up:
 	go run lucasgouvea-backend migrations:up
 migrations-down:
 	go run lucasgouvea-backend migrations:down
+build-backend:
+	set GOOS=linux
+	go build -o lucasgouvea-backend
+	set GOOS=windows
+deploy-backend:
+	make scp-backend

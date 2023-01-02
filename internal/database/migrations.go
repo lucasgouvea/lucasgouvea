@@ -3,6 +3,7 @@ package database
 import (
 	"log"
 	"os"
+	"strings"
 	"time"
 
 	"gorm.io/driver/postgres"
@@ -15,6 +16,17 @@ var db *gorm.DB
 func Start() {
 	var err error
 
+	var sb strings.Builder
+
+	sb.WriteString("host=localhost")
+	sb.WriteString(" user=")
+	sb.WriteString(os.Getenv("DB_USER"))
+	sb.WriteString(" password=")
+	sb.WriteString(os.Getenv("DB_PASSWORD"))
+	sb.WriteString(" dbname=")
+	sb.WriteString(os.Getenv("DB_NAME"))
+	sb.WriteString(" port=5432 sslmode=disable")
+
 	newLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
 		logger.Config{
@@ -26,7 +38,7 @@ func Start() {
 	)
 
 	db, err = gorm.Open(postgres.New(postgres.Config{
-		DSN:                  "host=localhost user=root password=pg_password dbname=pg_database port=5432 sslmode=disable",
+		DSN:                  sb.String(),
 		PreferSimpleProtocol: true,
 	}), &gorm.Config{
 		Logger: newLogger,
