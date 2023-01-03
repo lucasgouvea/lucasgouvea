@@ -2,22 +2,29 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	Posts "lucasgouvea-backend/internal/api/posts"
 
 	Database "lucasgouvea-backend/internal/database"
 
+	Shared "lucasgouvea-backend/internal/shared"
+
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
 
 	args := os.Args
-	fmt.Printf("args: %v\n", args)
+	fmt.Printf("Execution args: %v\n", args)
+
+	if Shared.GetEnvVars().GO_ENV != Shared.GetGoEnv().PROD {
+		fmt.Printf("Loading .env")
+		if err := godotenv.Load(); err != nil {
+			panic(err)
+		}
+	}
 
 	Database.Start()
 
@@ -32,10 +39,6 @@ func main() {
 		tables := []string{"keywords", "posts", "post_keywords", "lucas_gouvea"}
 		Database.Drop(tables)
 		return
-	}
-
-	if err != nil {
-		log.Fatal("Error loading .env file")
 	}
 
 	router := gin.Default()

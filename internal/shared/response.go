@@ -1,8 +1,6 @@
 package shared
 
 import (
-	"os"
-
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,7 +13,7 @@ type Response[T any] struct {
 }
 
 func (response Response[T]) Send(context *gin.Context, status int) {
-	if os.Getenv("ENVIRONMENT") != "PRODUCTION" {
+	if GetEnvVars().GO_ENV != GetGoEnv().PROD {
 		context.IndentedJSON(status, response)
 	} else {
 		context.JSON(status, response)

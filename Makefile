@@ -51,8 +51,14 @@ migrations-up:
 migrations-down:
 	go run lucasgouvea-backend migrations:down
 build-backend:
-	set GOOS=linux
-	go build -o lucasgouvea-backend
-	set GOOS=windows
+	GOOS=linux GOARCH=amd64 go build -o lucasgouvea-backend .
 deploy-backend:
+	ssh -i "${KEY_PATH}" ec2-user@${EC2_HOST} \
+	'\
+		sudo systemctl stop lucasgouvea;\
+	'
 	make scp-backend
+	ssh -i "${KEY_PATH}" ec2-user@${EC2_HOST} \
+	'\
+		sudo systemctl start lucasgouvea;\
+	'

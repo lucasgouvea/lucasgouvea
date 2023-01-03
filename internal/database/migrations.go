@@ -6,6 +6,8 @@ import (
 	"strings"
 	"time"
 
+	Shared "lucasgouvea-backend/internal/shared"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -20,11 +22,11 @@ func Start() {
 
 	sb.WriteString("host=localhost")
 	sb.WriteString(" user=")
-	sb.WriteString(os.Getenv("DB_USER"))
+	sb.WriteString(Shared.GetEnvVars().DB_USER)
 	sb.WriteString(" password=")
-	sb.WriteString(os.Getenv("DB_PASSWORD"))
+	sb.WriteString(Shared.GetEnvVars().DB_PASSWORD)
 	sb.WriteString(" dbname=")
-	sb.WriteString(os.Getenv("DB_NAME"))
+	sb.WriteString(Shared.GetEnvVars().DB_NAME)
 	sb.WriteString(" port=5432 sslmode=disable")
 
 	newLogger := logger.New(
