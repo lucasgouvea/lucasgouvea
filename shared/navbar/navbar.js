@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from 'next/image';
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./navbar.module.css"
 import { FaChevronRight } from 'react-icons/fa';
 import { FaCaretDown } from 'react-icons/fa';
@@ -28,6 +28,12 @@ export default function Navbar() {
 
     const optionLocale = localesOptions.filter((o) => o !== router.locale)[0]
 
+    useEffect(() => {
+        if (router.pathname === "/admin") {
+            setSelected('admin')
+        }
+    }, [router.pathname])
+
     return (
         <div className={styles.navbar}>
             <div className={styles.logo}>
@@ -35,7 +41,6 @@ export default function Navbar() {
                     className={styles.icon}
                     color="#FDFFF1"
                     size="12"
-
                     style={{ visibility: selected === 'lucas' ? 'visible' : 'hidden' }}
                 />
                 <p
@@ -57,7 +62,7 @@ export default function Navbar() {
                         blog
                     </Link>
                 </div>
-                <div className={styles.i18n}>
+                <div className={styles.i18n} style={{ visibility: selected === 'admin' ? 'hidden' : 'visible' }}>
                     <Image src={localeImgs[router.locale]} width={40} height={20} />
                     <FaCaretDown
                         className={styles.icon_arrow}

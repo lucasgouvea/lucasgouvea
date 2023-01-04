@@ -1,8 +1,9 @@
 import Navbar from '../../shared/navbar/navbar';
 
-export default function Contact(styles) {
+export default function Admin(styles) {
     return (
         <>
+            Admin
         </>
 
     )
