@@ -1,24 +1,11 @@
 import styles from '../../styles/post.module.css';
+
+import { loadPosts } from '../../lib/services';
 import { format } from "date-fns"
 
-export async function getStaticProps(context) {
-    let res
-
-    switch (context.locale) {
-        case 'en-US':
-            res = await fetch('http://localhost:8080/v1/posts', { headers: { "Accept-Language": "en_US" } })
-            break
-        case 'pt-BR':
-            res = await fetch('http://localhost:8080/v1/posts', { headers: { "Accept-Language": "pt_BR" } })
-            break
-        default:
-            res = await fetch('http://localhost:8080/v1/posts', { headers: { "Accept-Language": "en_US" } })
-    }
-
-    res = await res.json()
-    return {
-        props: { posts: res.data },
-    }
+export async function getStaticProps({ locale }) {
+    const posts = await loadPosts(process.env.ENVIRONMENT, locale)
+    return { props: { posts } }
 }
 
 export default function Post({ posts }) {

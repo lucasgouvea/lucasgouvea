@@ -14,8 +14,8 @@ type LucasGouveaSchema struct {
 }
 
 const (
-	pt_BR string = "pt_BR"
-	en_US        = "en_US"
+	pt_BR string = "pt-BR"
+	en_US        = "en-US"
 )
 
 func NewPostSchema(model Post, language string) PostSchema {

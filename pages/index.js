@@ -1,29 +1,14 @@
 import styles from '../styles/home.module.css';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import Link from "next/link"
+import { loadLucasgouvea } from '../lib/services';
 
-export async function getStaticProps(context) {
-  let res
-
-  switch (context.locale) {
-    case 'en-US':
-      res = await fetch('http://localhost:8080/v1/lucasgouvea', { headers: { "Accept-Language": "en_US" } })
-      break
-    case 'pt-BR':
-      res = await fetch('http://localhost:8080/v1/lucasgouvea', { headers: { "Accept-Language": "pt_BR" } })
-      break
-    default:
-      res = await fetch('http://localhost:8080/v1/lucasgouvea', { headers: { "Accept-Language": "en_US" } })
-  }
-
-  res = await res.json()
-  return {
-    props: { lucasgouvea: res.data[0] },
-  }
+export async function getStaticProps({ locale }) {
+  const lucasgouvea = await loadLucasgouvea(process.env.ENVIRONMENT, locale)
+  return { props: { lucasgouvea } }
 }
 
 export default function Home({ lucasgouvea }) {
-
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '6%', flexDirection: 'column' }}>
