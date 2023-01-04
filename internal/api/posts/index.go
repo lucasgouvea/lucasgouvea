@@ -6,4 +6,5 @@ func Start(router *gin.RouterGroup) {
 	router.GET("/posts", GetPosts)
 	router.GET("/lucasgouvea", GetLucasGouvea)
 	router.POST("/posts", PostPost)
+	router.PATCH("/posts/:id", PatchPost)
 }

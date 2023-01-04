@@ -40,6 +40,12 @@ func CreatePost(db *gorm.DB, post Post) error {
 	return err
 }
 
+func UpdatePost(db *gorm.DB, post Post) error {
+	err := db.Model(&Post{}).Where("id = ?", post.ID).Updates(post).Error
+
+	return err
+}
+
 func FindLucasGouvea(db *gorm.DB) (LucasGouvea, error) {
 	var lucasgouvea LucasGouvea
 	err := db.Find(&lucasgouvea).Error

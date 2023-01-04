@@ -2,6 +2,7 @@ package posts
 
 import (
 	Database "lucasgouvea-backend/internal/database"
+	"strconv"
 
 	Shared "lucasgouvea-backend/internal/shared"
 
@@ -36,6 +37,29 @@ func PostPost(context *gin.Context) {
 	}
 
 	if err := CreatePost(db, post); err != nil {
+		panic(err)
+	}
+
+	response := Shared.NewResponse([]Post{post})
+	response.Send(context, 200)
+}
+
+func PatchPost(context *gin.Context) {
+	var id uint64
+	var err error
+
+	if id, err = strconv.ParseUint(context.Param("id"), 10, 32); err != nil {
+		panic(err)
+	}
+
+	var post = Post{ID: uint(id)}
+	db := Database.GetDB()
+
+	if err := context.ShouldBindBodyWith(&post, binding.JSON); err != nil {
+		panic(err)
+	}
+
+	if err := UpdatePost(db, post); err != nil {
 		panic(err)
 	}
 
